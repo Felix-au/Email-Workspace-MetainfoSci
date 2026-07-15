@@ -26,19 +26,19 @@
   margin-bottom: 32px;
 }
 
-.logo {
-  display: inline-flex;
-  align-items: center;
+.logoContainer {
+  display: flex;
   justify-content: center;
-  width: 48px;
-  height: 48px;
-  border-radius: 10px;
-  background: linear-gradient(135deg, var(--primary), var(--primary-hover));
-  color: var(--primary-text);
-  font-weight: 700;
-  font-size: 20px;
   margin-bottom: 16px;
-  box-shadow: 0 4px 12px rgba(31, 111, 235, 0.3);
+}
+
+.brandLogo {
+  height: 48px;
+  object-fit: contain;
+}
+
+:global(.dark-theme) .brandLogo {
+  filter: invert(1) brightness(1.5);
 }
 
 .title {

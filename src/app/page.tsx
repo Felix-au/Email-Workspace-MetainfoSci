@@ -3,7 +3,8 @@
 import React, { useState, useEffect } from "react";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { Mail, AlertCircle, CheckCircle, Sun, Moon } from "lucide-react";
+import { AlertCircle, CheckCircle, Sun, Moon } from "lucide-react";
+import Image from "next/image";
 import styles from "./page.module.css";
 
 export default function Home() {
@@ -14,7 +15,7 @@ export default function Home() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [emailPrefix, setEmailPrefix] = useState("");
-  
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [successMsg, setSuccessMsg] = useState<string | null>(null);
@@ -142,14 +143,13 @@ export default function Home() {
       </button>
       <div className={styles.card}>
         <div className={styles.header}>
-          <div className={styles.logo}>
-            <Mail size={22} strokeWidth={2.5} />
+          <div className={styles.logoContainer}>
+            <Image src="/logo.png" alt="metainfosci Logo" width={180} height={48} className={styles.brandLogo} priority />
           </div>
-          <h1 className={styles.title}>metainfosci</h1>
           <p className={styles.subtitle}>
             {isLogin
-              ? "Sign in to manage your domain inbox"
-              : "Register a custom @metainfosci.com address"}
+              ? "Log in to check your emails"
+              : "Register a new email account"}
           </p>
         </div>
 

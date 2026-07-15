@@ -17,6 +17,21 @@
   flex-shrink: 0;
 }
 
+.logoContainer {
+  padding: 24px 20px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.sidebarLogo {
+  height: 36px;
+  object-fit: contain;
+}
+
+:global(.dark-theme) .sidebarLogo {
+  filter: invert(1) brightness(1.5);
+}
+
 .profile {
   padding: 24px 20px;
   border-bottom: 1px solid var(--card-border);

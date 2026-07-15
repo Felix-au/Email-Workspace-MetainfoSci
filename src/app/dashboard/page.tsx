@@ -9,6 +9,7 @@ import {
   Settings, Trash2, Plus
 } from "lucide-react";
 import styles from "./dashboard.module.css";
+import Image from "next/image";
 
 interface EmailType {
   _id: string;
@@ -418,6 +419,9 @@ export default function UserDashboard() {
     <div className={styles.container}>
       {/* Sidebar */}
       <aside className={styles.sidebar}>
+        <div className={styles.logoContainer}>
+          <Image src="/logo.png" alt="metainfosci Logo" width={140} height={36} className={styles.sidebarLogo} priority />
+        </div>
         <div className={styles.profile}>
           <div className={styles.avatar}>{getInitials(session?.user?.name || "")}</div>
           <h2 className={styles.profileName}>{session?.user?.name}</h2>
