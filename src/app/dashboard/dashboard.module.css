@@ -26,7 +26,7 @@
 .sidebarLogo {
   height: 44px;
   object-fit: contain;
-  margin-left: 8px;
+  margin-left: -14px;
 }
 
 :global(.dark-theme) .sidebarLogo {
@@ -34,7 +34,7 @@
 }
 
 .profile {
-  padding: 8px 20px 24px;
+  padding: 14px 20px 24px;
   border-bottom: 1px solid var(--card-border);
 }
 
