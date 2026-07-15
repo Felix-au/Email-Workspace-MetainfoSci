@@ -483,9 +483,6 @@ export default function AdminDashboard() {
           <Image src="/logo.png" alt="metainfosci Logo" width={140} height={36} className={styles.sidebarLogo} priority />
         </div>
         <div className={styles.profile}>
-          <div className={styles.avatar} style={{ background: "linear-gradient(135deg, var(--primary), var(--primary-hover))" }}>
-            {getInitials(session?.user?.name || "")}
-          </div>
           <h2 className={styles.profileName}>{session?.user?.name} (Admin)</h2>
           <p className={styles.profileEmail}>{session?.user?.email}</p>
         </div>

@@ -423,7 +423,6 @@ export default function UserDashboard() {
           <Image src="/logo.png" alt="metainfosci Logo" width={140} height={36} className={styles.sidebarLogo} priority />
         </div>
         <div className={styles.profile}>
-          <div className={styles.avatar}>{getInitials(session?.user?.name || "")}</div>
           <h2 className={styles.profileName}>{session?.user?.name}</h2>
           <p className={styles.profileEmail}>{session?.user?.email}</p>
         </div>

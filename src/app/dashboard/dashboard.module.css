@@ -20,7 +20,7 @@
 .logoContainer {
   padding: 24px 20px 0;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .sidebarLogo {
@@ -33,7 +33,7 @@
 }
 
 .profile {
-  padding: 24px 20px;
+  padding: 8px 20px 24px;
   border-bottom: 1px solid var(--card-border);
 }
 
