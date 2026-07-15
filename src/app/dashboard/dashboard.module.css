@@ -24,8 +24,9 @@
 }
 
 .sidebarLogo {
-  height: 36px;
+  height: 44px;
   object-fit: contain;
+  margin-left: 8px;
 }
 
 :global(.dark-theme) .sidebarLogo {

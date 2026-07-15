@@ -480,7 +480,7 @@ export default function AdminDashboard() {
       {/* Sidebar */}
       <aside className={styles.sidebar}>
         <div className={styles.logoContainer}>
-          <Image src="/logo.png" alt="metainfosci Logo" width={140} height={36} className={styles.sidebarLogo} priority />
+          <Image src="/logo.png" alt="metainfosci Logo" width={170} height={44} className={styles.sidebarLogo} priority />
         </div>
         <div className={styles.profile}>
           <h2 className={styles.profileName}>{session?.user?.name} (Admin)</h2>
