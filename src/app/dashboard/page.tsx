@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { 
@@ -33,6 +33,7 @@ export default function UserDashboard() {
   const router = useRouter();
 
   const [activeTab, setActiveTab] = useState<"inbox" | "sent" | "settings">("inbox");
+  const hasFetched = useRef(false);
   const [emails, setEmails] = useState<EmailType[]>([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
@@ -128,9 +129,10 @@ export default function UserDashboard() {
 
   // Fetch settings & emails on mount
   useEffect(() => {
-    if (status === "authenticated" && session?.user?.status === "APPROVED") {
+    if (status === "authenticated" && session?.user?.status === "APPROVED" && !hasFetched.current) {
+      hasFetched.current = true;
       const timer = setTimeout(() => {
-        fetchEmails();
+        fetchEmails(true);
         fetchSettings();
       }, 0);
       return () => clearTimeout(timer);

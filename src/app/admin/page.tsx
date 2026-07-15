@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { 
@@ -42,6 +42,7 @@ export default function AdminDashboard() {
   const router = useRouter();
 
   const [activeTab, setActiveTab] = useState<"inbox" | "sent" | "approvals" | "accounts" | "settings">("inbox");
+  const hasFetched = useRef(false);
   const [emails, setEmails] = useState<EmailType[]>([]);
   const [users, setUsers] = useState<UserType[]>([]);
   const [loading, setLoading] = useState(true);
@@ -149,9 +150,10 @@ export default function AdminDashboard() {
 
   // Initial Data Fetch
   useEffect(() => {
-    if (status === "authenticated" && session?.user?.role === "ADMIN") {
+    if (status === "authenticated" && session?.user?.role === "ADMIN" && !hasFetched.current) {
+      hasFetched.current = true;
       const timer = setTimeout(() => {
-        fetchEmails();
+        fetchEmails(true);
         fetchUsers();
         fetchSettings();
       }, 0);
