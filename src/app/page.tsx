@@ -130,7 +130,7 @@ export default function Home() {
   if (status === "loading") {
     return (
       <div className={styles.container}>
-        <div className={styles.spinner} style={{ width: "32px", height: "32px" }}></div>
+        <div className={styles.pageSpinner}></div>
       </div>
     );
   }
