@@ -65,6 +65,9 @@ export default function AdminDashboard() {
   const [newFooterContent, setNewFooterContent] = useState("");
   const [settingsError, setSettingsError] = useState<string | null>(null);
   const [settingsSuccess, setSettingsSuccess] = useState<string | null>(null);
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [passwordUpdating, setPasswordUpdating] = useState(false);
 
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');
 
@@ -409,6 +412,41 @@ export default function AdminDashboard() {
     }
   };
 
+  const handleChangePassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!currentPassword || !newPassword) return;
+
+    setSettingsError(null);
+    setSettingsSuccess(null);
+    setPasswordUpdating(true);
+
+    try {
+      const res = await fetch("/api/user/settings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          action: "change_password",
+          currentPassword,
+          newPassword,
+        }),
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
+        setSettingsError(data.error || "Failed to update password");
+      } else {
+        setSettingsSuccess(data.message || "Password updated successfully");
+        setCurrentPassword("");
+        setNewPassword("");
+      }
+    } catch (err) {
+      console.error("Change password error:", err);
+      setSettingsError("An error occurred. Try again.");
+    } finally {
+      setPasswordUpdating(false);
+    }
+  };
+
   if (status === "loading" || (status === "authenticated" && loading)) {
     return (
       <div className={styles.loadingOverlay}>
@@ -619,6 +657,33 @@ export default function AdminDashboard() {
                   required
                 />
                 <button type="submit" className={styles.addButton}>Save Signature</button>
+              </form>
+            </div>
+
+            {/* Change Password */}
+            <div className={styles.settingsSection}>
+              <h2 className={styles.settingsSectionTitle}>Security</h2>
+              <form onSubmit={handleChangePassword} className={styles.addForm}>
+                <h4 style={{ fontSize: "13px", fontWeight: "600" }}>Change Account Password</h4>
+                <input 
+                  type="password" 
+                  className={styles.addInput} 
+                  placeholder="Current Password"
+                  value={currentPassword}
+                  onChange={(e) => setCurrentPassword(e.target.value)}
+                  required
+                />
+                <input 
+                  type="password" 
+                  className={styles.addInput} 
+                  placeholder="New Password (min 6 characters)"
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                  required
+                />
+                <button type="submit" className={styles.addButton} disabled={passwordUpdating}>
+                  {passwordUpdating ? "Updating..." : "Update Password"}
+                </button>
               </form>
             </div>
           </div>
